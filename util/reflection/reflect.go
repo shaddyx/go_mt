@@ -7,16 +7,16 @@ func IsPointer(s any) bool {
 }
 
 func IsMapPointer(s any) bool {
-	return reflect.TypeOf(s).Kind() == reflect.Pointer &&
+	return IsPointer(s) &&
 		reflect.TypeOf(s).Elem().Kind() == reflect.Map
 }
 
 func IsStructurePointer(s any) bool {
-	return reflect.TypeOf(s).Kind() == reflect.Pointer &&
+	return IsPointer(s) &&
 		reflect.TypeOf(s).Elem().Kind() == reflect.Struct
 }
 
 func IsStringPointer(s any) bool {
-	return reflect.TypeOf(s).Kind() == reflect.Pointer &&
+	return IsPointer(s) &&
 		reflect.TypeOf(s).Elem().Kind() == reflect.String
 }
