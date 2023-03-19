@@ -1,6 +1,7 @@
 package reflection
 
 import (
+	"fmt"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -46,4 +47,22 @@ func TestIsStringPointer(t *testing.T) {
 	assert.False(t, IsStringPointer(m))
 	assert.False(t, IsStringPointer(i))
 	assert.False(t, IsStringPointer(&i))
+}
+
+func TestUnmarshalTo(t *testing.T) {
+	s := "123"
+	f := 1.25
+	i := 1
+	m := make(map[string]any)
+	err := UnmarshalTo("1", &s)
+	assert.NoError(t, err)
+	err = UnmarshalTo("2.5", &f)
+	assert.Error(t, err)
+	err = UnmarshalTo("2", &i)
+	assert.Error(t, err)
+	err = UnmarshalTo(`{"a":1}`, &m)
+	assert.NoError(t, err)
+	fmt.Println("s", s)
+	fmt.Println("m", m)
+	//assert.True(t, IsStringPointer(&m))
 }
